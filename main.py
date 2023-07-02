@@ -29,6 +29,12 @@ class MovObject:
         self.move_right = [speed, 0]
         pass
 
+    def check_obstacle(self):
+        pass
+
+    def obj_move_active(self, keyinput):
+        pass
+
 
 player_move = MovObject(speed=4)
 
@@ -64,4 +70,3 @@ while playing:
     if keys[K_ESCAPE]:
         break
     pygame.display.flip()
-    print(player_rect.center)
