@@ -20,10 +20,17 @@ COLOR_BG = (10, 10, 10)
 
 main_display = pygame.display.set_mode((DISP_WIDTH, DISP_HEIGHT))
 
-player_move_down = [0, 4]
-player_move_up = [0, -4]
-player_move_left = [-4, 0]
-player_move_right = [4, 0]
+
+class MovObject:
+    def __init__(self, speed):
+        self.move_down = [0, speed]
+        self.move_up = [0, -speed]
+        self.move_left = [-speed, 0]
+        self.move_right = [speed, 0]
+        pass
+
+
+player_move = MovObject(speed=4)
 
 player = pygame.Surface(SIZE_PLAYER)
 player.fill(COLOR_PLAYER)
@@ -42,13 +49,13 @@ while playing:
 
     keys = pygame.key.get_pressed()
     if keys[K_DOWN] and player_rect.bottom <= DISP_HEIGHT:
-        player_rect = player_rect.move(player_move_down)
+        player_rect = player_rect.move(player_move.move_down)
     if keys[K_UP] and player_rect.top > -1:
-        player_rect = player_rect.move(player_move_up)
+        player_rect = player_rect.move(player_move.move_up)
     if keys[K_LEFT] and player_rect.left > -1:
-        player_rect = player_rect.move(player_move_left)
+        player_rect = player_rect.move(player_move.move_left)
     if keys[K_RIGHT] and player_rect.right <= DISP_WIDTH:
-        player_rect = player_rect.move(player_move_right)
+        player_rect = player_rect.move(player_move.move_right)
 
     main_display.blit(player, player_rect)
     main_display.blit(FONT.render(str(score), True,
